@@ -68,8 +68,8 @@ export function Header() {
 
       <div className="flex items-center gap-3">
         <div className="flex flex-col items-end gap-0.5">
-          <span className="text-sm font-medium">Diego Fernandes</span>
-          <span className="text-xs text-zinc-400">diego@nivo.video</span>
+          <span className="text-sm font-medium">Michael Moranis</span>
+          <span className="text-xs text-zinc-400">michaelmoranis@nivo.video</span>
         </div>
         <img
           src="https://github.com/diego3g.png"

@@ -10,6 +10,7 @@ import { Pagination } from './components/pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
+import { CreateTagForm } from './components/create-tag-form'
 
 export interface TagResponse {
   first: number
@@ -83,7 +84,7 @@ export function App() {
 
             <Dialog.Portal>
               <Dialog.Overlay className='fixed inset-0 bg-black/70' />
-              <Dialog.Content className='fixed p-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-l border-zinc-900'>
+              <Dialog.Content className='fixed p-10 space-y-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-l border-zinc-900'>
                 <div className='space-y-3'>
                   <Dialog.Title className='font-xl font-bold'>
                     Create tag
@@ -92,6 +93,7 @@ export function App() {
                     Tags can be used to group videos about similar concepts
                   </Dialog.Description>
                 </div>
+                <CreateTagForm />
                 <Dialog.Close />
               </Dialog.Content>
             </Dialog.Portal>
