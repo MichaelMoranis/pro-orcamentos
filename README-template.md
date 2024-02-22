@@ -1,14 +1,12 @@
-# Frontend Mentor - Todo app solution
+# Frontend Projeto Nivo VS Michael Moranis
 
-This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
-
-## Table of contents
+## Tabela de Conteudos
 
 - [Overview](#overview)
-  - [The challenge](#the-challenge)
+  - [O desafio](#criar-lista-de-produtos)
   - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
+- [Meu processo](#meu-processo)
+- [Uso de ferramentas/libs](#uso-de-ferramentas-libs)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
@@ -35,6 +33,11 @@ Users should be able to:
 - **Bonus**: Drag and drop to reorder items on the list
 
 ### Screenshot
+
+### Uso de ferramentas/libs 
+
+## Json Server
+- Com essa ferramenta, eu criei uma API falsa, me retornando dados para uso no aplicacao, com ela tambem eh possivel usar metodos que alteram essa API falsa.
 
 ![](./screenshot.jpg)
 
