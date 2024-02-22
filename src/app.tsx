@@ -9,6 +9,7 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query'
 import { Pagination } from './components/pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
 
 export interface TagResponse {
   first: number
@@ -30,35 +31,35 @@ export interface Tag {
 
 export function App() {
   const [searchParams, setSeachParams] = useSearchParams()
-  const ulrFilter = searchParams.get('filter') ?? '' 
+  const ulrFilter = searchParams.get('filter') ?? ''
 
-  const [filter, setFilter] = useState(ulrFilter); 
+  const [filter, setFilter] = useState(ulrFilter);
 
-  const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1 
+  const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1
 
-  const {data: tagResponse, isLoading } = useQuery<TagResponse>({
+  const { data: tagResponse, isLoading } = useQuery<TagResponse>({
     queryKey: ['get-tags', ulrFilter, page],
     queryFn: async () => {
       const response = await fetch(`http://localhost:3333/tags?_page=${page}&_per_page&title=${ulrFilter}`)
       const data = await response.json()
       console.log(data)
-      
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
+
+      await new Promise(resolve => setTimeout(resolve, 1000))
+
       return data
     },
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60,
   })
 
-  if(isLoading) {
+  if (isLoading) {
     return null
   }
 
   function handleFilter() {
     setSeachParams(params => {
       params.set('page', '1'),
-      params.set('filter', filter)
+        params.set('filter', filter)
       return params
     })
   }
@@ -72,17 +73,36 @@ export function App() {
       <main className='max-w-6xl mx-auto space-y-5'>
         <div className='flex items-center gap-3'>
           <h1 className='text-xl font-bold'>Tags</h1>
-          <Button variant='primary'>
-            <Plus className='size-3' />
-            Create new
-          </Button>
+          <Dialog.Root>
+            <Dialog.DialogTrigger asChild>
+              <Button variant='primary'>
+                <Plus className='size-3' />
+                Create new
+              </Button>
+            </Dialog.DialogTrigger>
+
+            <Dialog.Portal>
+              <Dialog.Overlay className='fixed inset-0 bg-black/70' />
+              <Dialog.Content className='fixed p-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-l border-zinc-900'>
+                <div className='space-y-3'>
+                  <Dialog.Title className='font-xl font-bold'>
+                    Create tag
+                  </Dialog.Title>
+                  <Dialog.Description className='text-sm text-zinc-500'>
+                    Tags can be used to group videos about similar concepts
+                  </Dialog.Description>
+                </div>
+                <Dialog.Close />
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
         </div>
         <div className='flex items-center justify-between'>
-        <div className="flex items-center">
+          <div className="flex items-center">
             <Input variant='filter'>
               <Search className="size-3" />
-              <Control 
-                placeholder="Search tags..." 
+              <Control
+                placeholder="Search tags..."
                 onChange={e => setFilter(e.target.value)}
                 value={filter}
               />
