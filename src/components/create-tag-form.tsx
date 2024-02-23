@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as Dialog from '@radix-ui/react-dialog'
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function CreateTagForm() {
+    const queryClient = useQueryClient();
   // fazendo validacao de formulario 
   const createTagSchema = z.object({
     title: z.string().min(3, { message: 'Minimum 03 characters.' }),
@@ -28,20 +30,32 @@ export function CreateTagForm() {
     resolver: zodResolver(createTagSchema)
   })
 
- async function createTag({title, slug, }: CreateTagSchema) {
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({title, slug }: CreateTagSchema) => {
+      await new Promise(resolve => setTimeout(resolve, 2000))
 
-  await new Promise(resolve => setTimeout(resolve, 2000))
-
-   await fetch('http://localhost:3333/tags', {
-    method: 'Post',
-    body: JSON.stringify({
-      title,
-      slug, 
-      amountOfVideos: 0,
-    })
+      await fetch('http://localhost:3333/tags', {
+       method: 'Post',
+       body: JSON.stringify({
+         title,
+         slug, 
+         amountOfVideos: 0,
+       })
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["get-tags"],
+      })
+    }
    })
+
+ async function createTag({title, slug, }: CreateTagSchema) {
+      await mutateAsync({title, slug});
   }
   const generateSlug =  watch('title') ? getSlugFromString(watch('title')) : ''
+
+  console.log(formState.errors)
 
   return (
     <form onSubmit={handleSubmit(createTag)} className="w-full space-y-6">
@@ -53,6 +67,9 @@ export function CreateTagForm() {
           id="name"
           type="text"
         />
+        {formState.errors?.title && (
+          <p className="text-sm text-red-400">{formState.errors.title.message}</p>
+        )}
       </div>
 
       <div className="space-y-2">
@@ -73,7 +90,7 @@ export function CreateTagForm() {
           </Button>
         </Dialog.Close>
         <Button disabled={formState.isSubmitting} className=" bg-teal-400 text-teal-950" type="submit">
-          {formState.isSubmitting ? <Loader2 className='size-3' /> :  <Check className="size-3" />}
+          {formState.isSubmitting ? <Loader2 className='size-3 animate-spin' /> :  <Check className="size-3" />}
           Save
         </Button>
       </div>
