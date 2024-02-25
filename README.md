@@ -3,7 +3,7 @@
 ## Tabela de Conteudos
 
 - [Overview](#overview)
-  - [O desafio](#criar-lista-de-produtos)
+  - [Insights](#insights)
   - [Screenshot](#screenshot)
 - [Meu processo](#meu-processo)
 - [Uso de ferramentas/libs](#uso-de-ferramentas-libs)
@@ -14,23 +14,9 @@
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
-### The challenge
-
-Users should be able to:
-
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Add new todos to the list
-- Mark todos as complete
-- Delete todos from the list
-- Filter by all/active/complete todos
-- Clear all completed todos
-- Toggle light and dark mode
-- **Bonus**: Drag and drop to reorder items on the list
 
 ### Screenshot
 
@@ -39,7 +25,13 @@ Users should be able to:
 ## Json Server
 - Com essa ferramenta, eu criei uma API falsa, me retornando dados para uso no aplicacao, com ela tambem eh possivel usar metodos que alteram essa API falsa.
 
-![](./screenshot.jpg)
+### Insights
+
+Neste projeto fiquei travado em bug onde meu formulario nao enviava a solicitacao de requisicao do tipo post porque eu tinha esquecido de um detalhe do HTML. Campos de input mesmo tipados com ```html
+ <input type="number" />
+```  nao enviam os dados quando submetidos por um formulario, entao tive que fazer uma conversao na minha requisicao post: 
+
+![](./public/bug-imput.jpg)
 
 Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
 
@@ -69,9 +61,10 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 
-### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+
+
+
 
 To see how you can add code snippets, see below:
 
