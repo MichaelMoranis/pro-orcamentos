@@ -1,6 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 
-import nivoLogo from '../assets/logo-nivo.svg'
+import logoO from '../assets/logo.svg'
 import { Badge } from './ui/badge'
 
 export function Header() {
@@ -8,7 +8,7 @@ export function Header() {
     <div className="max-w-[1200px] mx-auto flex items-center justify-between">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2.5">
-          <img src={nivoLogo} alt="nivo.video" />
+          <img src={logoO} alt="nivo.video" />
 
           <Badge>BETA</Badge>
         </div>
@@ -36,7 +36,7 @@ export function Header() {
             alt=""
           />
 
-          <span className="text-sm font-medium text-zinc-100">Rocketseat</span>
+          <span className="text-sm font-medium text-zinc-100">Mercury</span>
 
           <Badge variant="primary">PRO</Badge>
 
@@ -69,7 +69,7 @@ export function Header() {
       <div className="flex items-center gap-3">
         <div className="flex flex-col items-end gap-0.5">
           <span className="text-sm font-medium">Michael Moranis</span>
-          <span className="text-xs text-zinc-400">michaelmoranis@nivo.video</span>
+          <span className="text-xs text-zinc-400">michaelmoranis@orcaweb.buget</span>
         </div>
         <img
           src="https://github.com/diego3g.png"

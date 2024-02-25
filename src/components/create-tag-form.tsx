@@ -10,8 +10,9 @@ export function CreateTagForm() {
     const queryClient = useQueryClient();
   // fazendo validacao de formulario 
   const createTagSchema = z.object({
+    amountOfVideos: z.string(),
     title: z.string().min(3, { message: 'Minimum 03 characters.' }),
-    slug: z.string()
+  
   })
 
   // inferencia de tipo a partir de uma variavel existente
@@ -26,20 +27,21 @@ export function CreateTagForm() {
       .replace(/\s+/g, '-');
   }
 
-  const { register, handleSubmit, watch, formState } = useForm<CreateTagSchema>({
+  const { register, handleSubmit, watch, formState,  } = useForm<CreateTagSchema>({
     resolver: zodResolver(createTagSchema)
   })
 
   const { mutateAsync } = useMutation({
-    mutationFn: async ({title, slug }: CreateTagSchema) => {
-      await new Promise(resolve => setTimeout(resolve, 2000))
+    mutationFn: async ({ title, amountOfVideos }: CreateTagSchema) => {
+
+      await new Promise(resolve => setTimeout(resolve, 1000))
 
       await fetch('http://localhost:3333/tags', {
        method: 'Post',
        body: JSON.stringify({
          title,
          slug, 
-         amountOfVideos: 0,
+         amountOfVideos: Number(amountOfVideos),
        })
       })
     },
@@ -50,17 +52,15 @@ export function CreateTagForm() {
     }
    })
 
- async function createTag({title, slug, }: CreateTagSchema) {
-      await mutateAsync({title, slug});
+ async function createTag({ title, amountOfVideos }: CreateTagSchema) {
+      await mutateAsync({ title, amountOfVideos });
   }
-  const generateSlug =  watch('title') ? getSlugFromString(watch('title')) : ''
-
-  console.log(formState.errors)
+  const slug =  watch('title') ? getSlugFromString(watch('title')) : ''
 
   return (
     <form onSubmit={handleSubmit(createTag)} className="w-full space-y-6">
       <div className="space-y-2">
-        <label className="text-sm font-medium block" htmlFor="title">Tag name</label>
+        <label className="text-sm font-medium block" htmlFor="title">Nome do produto:</label>
         <input
           {...register('title')}
           className="border border-zinc-800 rounded-lg px-3 px-y bg-zinc-800/50 w-full"
@@ -71,15 +71,23 @@ export function CreateTagForm() {
           <p className="text-sm text-red-400">{formState.errors.title.message}</p>
         )}
       </div>
+      <div className="space-y-2">
+        <label className="text-sm font-medium block" htmlFor="amountOfVideos">preco:</label>
+        <input
+          {...register('amountOfVideos')}
+          className="border border-zinc-800 rounded-lg px-3 px-y bg-zinc-800/50 w-full"
+          placeholder="$"
+          type="number"
+        />
+      </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium block" htmlFor="slug">Slug</label>
+        <label className="text-sm font-medium block" htmlFor="slug">produto:</label>
         <input
-          {...register('slug')}
           className="border border-zinc-800 rounded-lg px-3 px-y bg-zinc-800/50 w-full"
           id="slug"
           type="text"
-          value={generateSlug}
+          value={slug}
           readOnly />
       </div>
       <div className="flex items-center justify-end gap-2">

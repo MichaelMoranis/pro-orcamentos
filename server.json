@@ -1,58 +1,16 @@
 {
   "tags": [
     {
-      "title": "Redis",
-      "slug": "old",
-      "amountOfVideos": 113,
-      "id": "053c"
+      "id": "f688",
+      "title": "monitor",
+      "slug": "monitor",
+      "amountOfVideos": 100
     },
     {
-      "title": "Angular",
-      "slug": "old",
-      "amountOfVideos": 57,
-      "id": "f068"
-    },
-    {
-      "title": "React",
-      "slug": "old",
-      "amountOfVideos": 85,
-      "id": "8ef1"
-    },
-    {
-      "id": "3115",
-      "name": "TAG DO MICHAEL",
-      "slug": "",
-      "amountOfVideos": 0
-    },
-    {
-      "id": "5dfe",
-      "name": "TAG DA MISLANE",
-      "slug": "tag-da-mislane",
-      "amountOfVideos": 0
-    },
-    {
-      "id": "cbaa",
-      "title": "TAG DA maria",
-      "slug": "tag-da-mislane",
-      "amountOfVideos": 0
-    },
-    {
-      "id": "12f1",
-      "title": "test do slug",
-      "slug": "",
-      "amountOfVideos": 0
-    },
-    {
-      "id": "4354",
-      "title": "asdfa",
-      "slug": "",
-      "amountOfVideos": 0
-    },
-    {
-      "id": "8353",
-      "title": "atualizacao automatica",
-      "slug": "",
-      "amountOfVideos": 0
+      "id": "ca56",
+      "title": "cadeira eletrica ",
+      "slug": "cadeira-eletrica-",
+      "amountOfVideos": 2450
     }
   ]
 }

@@ -43,7 +43,6 @@ export function App() {
     queryFn: async () => {
       const response = await fetch(`http://localhost:3333/tags?_page=${page}&_per_page&title=${ulrFilter}`)
       const data = await response.json()
-      console.log(data)
 
       await new Promise(resolve => setTimeout(resolve, 1000))
 
@@ -73,12 +72,12 @@ export function App() {
       </div>
       <main className='max-w-6xl mx-auto space-y-5'>
         <div className='flex items-center gap-3'>
-          <h1 className='text-xl font-bold'>Tags</h1>
+          <h1 className='text-xl font-bold'>Orçamento</h1>
           <Dialog.Root>
             <Dialog.DialogTrigger asChild>
               <Button variant='primary'>
                 <Plus className='size-3' />
-                Create new
+                criar novo orcamento
               </Button>
             </Dialog.DialogTrigger>
 
@@ -87,10 +86,10 @@ export function App() {
               <Dialog.Content className='fixed p-10 space-y-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-l border-zinc-900'>
                 <div className='space-y-3'>
                   <Dialog.Title className='font-xl font-bold'>
-                    Create tag
+                    Criar produtos
                   </Dialog.Title>
                   <Dialog.Description className='text-sm text-zinc-500'>
-                    Tags can be used to group videos about similar concepts
+                   tabela para criacao de produtos
                   </Dialog.Description>
                 </div>
                 <CreateTagForm />
@@ -111,20 +110,20 @@ export function App() {
             </Input>
             <Button onClick={handleFilter}>
               <Filter className="size-3" />
-              Filter
+              Filtrar
             </Button>
           </div>
           <Button>
             <FileDown className='size-3' />
-            export
+            exportar
           </Button>
         </div>
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead></TableHead>
-              <TableHead>Tags</TableHead>
-              <TableHead>Amount of videos</TableHead>
+              <TableHead>Produtos</TableHead>
+              <TableHead>Valores dos produtos</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
@@ -140,7 +139,7 @@ export function App() {
                     </div>
                   </TableCell>
                   <TableCell className='text-zinc-300'>
-                    {tag.amountOfVideos} video(s)
+                    $ {tag.amountOfVideos},00
                   </TableCell>
                   <TableCell className='text-right'>
                     <Button className='icon'>
