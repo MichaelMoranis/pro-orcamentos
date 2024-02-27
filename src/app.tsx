@@ -65,7 +65,7 @@ export function App() {
   }
 
   return (
-    <div className='py-10 space-y-8'>
+    <div className='py-10 px-10 space-y-8'>
       <div>
         <Header />
         <Tabs />
@@ -99,7 +99,7 @@ export function App() {
           </Dialog.Root>
         </div>
         <div className='flex items-center justify-between'>
-          <div className="flex items-center">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <Input variant='filter'>
               <Search className="size-3" />
               <Control

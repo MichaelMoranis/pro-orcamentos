@@ -1,6 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 
-import logoO from '../assets/logo.svg'
+import logo from '../assets/logo.svg'
 import { Badge } from './ui/badge'
 
 export function Header() {
@@ -8,7 +8,7 @@ export function Header() {
     <div className="max-w-[1200px] mx-auto flex items-center justify-between">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2.5">
-          <img src={logoO} alt="nivo.video" />
+          <img src={logo} alt="nivo.video" />
 
           <Badge>BETA</Badge>
         </div>
@@ -30,19 +30,10 @@ export function Header() {
         </svg>
 
         <div className="flex items-center gap-2.5">
-          <img
-            src="https://github.com/rocketseat.png"
-            className="size-5 rounded-full"
-            alt=""
-          />
-
           <span className="text-sm font-medium text-zinc-100">Mercury</span>
-
           <Badge variant="primary">PRO</Badge>
-
           <ChevronDown className="text-zinc-600 size-4" />
         </div>
-
         <svg
           width="6"
           height="16"
@@ -58,18 +49,10 @@ export function Header() {
             className="stroke-zinc-700"
           />
         </svg>
-
-        <div className="flex items-center gap-2.5">
-          <span className="text-sm font-medium text-zinc-100">Ignite</span>
-
-          <ChevronDown className="text-zinc-600 size-4" />
-        </div>
       </div>
-
       <div className="flex items-center gap-3">
         <div className="flex flex-col items-end gap-0.5">
           <span className="text-sm font-medium">Michael Moranis</span>
-          <span className="text-xs text-zinc-400">michaelmoranis@orcaweb.buget</span>
         </div>
         <img
           src="https://github.com/diego3g.png"

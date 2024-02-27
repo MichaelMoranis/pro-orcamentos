@@ -59,11 +59,11 @@ export function Pagination({ items, page, pages }: PaginationProps) {
   }
 
   return (
-    <div className="flex text-sm items-center justify-between text-zinc-500">
-      <span>Showing 10 of {items} items</span>
-      <div className="flex items-center gap-8">
+    <div className="flex flex-col text-sm items-center justify-between text-zinc-500 md:flex-row gap-8">
+      <span>Mostrar {items} itens</span>
+      <div className="flex flex-col items-center gap-8 md:flex-row">
         <div className="flex items-center gap-2">
-          <span>Rows per page</span>
+          <span>Itens por pagina</span>
 
           <Select defaultValue="10">
             <SelectTrigger aria-label="Page" />
@@ -75,24 +75,24 @@ export function Pagination({ items, page, pages }: PaginationProps) {
           </Select>
         </div>
 
-        <span>Page {page} of {pages}</span>
+        <span>Pagina {page} de {pages}</span>
 
         <div className="space-x-1.5">
           <Button onClick={firstPage} size="icon" disabled={page - 1 <= 0}>
             <ChevronsLeft className="size-4" />
-            <span className="sr-only">First page</span>
+            <span className="sr-only">Pagina 01</span>
           </Button>
           <Button onClick={previousPage} size="icon" disabled={page - 1 <= 0}>
             <ChevronLeft className="size-4" />
-            <span className="sr-only">Previous page</span>
+            <span className="sr-only">Pagina anterior</span>
           </Button>
           <Button onClick={nextPage} size="icon" disabled={page + 1 > pages}>
             <ChevronRight className="size-4" />
-            <span className="sr-only">Next page</span>
+            <span className="sr-only">Proxima pagina</span>
           </Button>
           <Button onClick={lastPage} size="icon" disabled={page + 1 > pages}>
             <ChevronsRight className="size-4" />
-            <span className="sr-only">Last page</span>
+            <span className="sr-only">Ultima pagina</span>
           </Button>
         </div>
       </div>
