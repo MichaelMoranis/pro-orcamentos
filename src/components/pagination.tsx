@@ -65,7 +65,7 @@ export function Pagination({ items, page, pages }: PaginationProps) {
         <div className="flex items-center gap-2">
           <span>Itens por pagina</span>
 
-          <Select defaultValue="10">
+          <Select defaultValue="50">
             <SelectTrigger aria-label="Page" />
             <SelectContent>
               <SelectItem value="10">10</SelectItem>

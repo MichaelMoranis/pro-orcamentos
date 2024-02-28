@@ -1,88 +1,34 @@
 {
   "tags": [
     {
-      "id": "f688",
-      "title": "monitor",
-      "slug": "monitor",
-      "amountOfVideos": 100
+      "id": "e91b",
+      "title": "lapis de madeira",
+      "slug": "lapis-de-madeira",
+      "amountOfVideos": 2
     },
     {
-      "id": "ca56",
-      "title": "cadeira eletrica ",
-      "slug": "cadeira-eletrica-",
-      "amountOfVideos": 2450
+      "id": "8983",
+      "title": "caderno",
+      "slug": "caderno",
+      "amountOfVideos": 40
     },
     {
-      "id": "2a24",
-      "title": "sapato social ",
-      "slug": "sapato-social-",
-      "amountOfVideos": 32990
+      "id": "8a1d",
+      "title": "roupas",
+      "slug": "roupas",
+      "amountOfVideos": 678
     },
     {
-      "id": "a5e0",
-      "title": "teclado",
-      "slug": "teclado",
-      "amountOfVideos": 388
+      "id": "1d4f",
+      "title": "werw",
+      "slug": "werw",
+      "amountOfVideos": null
     },
     {
-      "id": "4712",
-      "title": "computador",
-      "slug": "computador",
-      "amountOfVideos": 2500
-    },
-    {
-      "id": "4152",
-      "title": "pc de mesa",
-      "slug": "pc-de-mesa",
-      "amountOfVideos": 333
-    },
-    {
-      "id": "6a0e",
-      "title": "cadeira gamer",
-      "slug": "cadeira-gamer",
-      "amountOfVideos": 1309
-    },
-    {
-      "id": "f20b",
-      "title": "sofa eletrico",
-      "slug": "sofa-eletrico",
-      "amountOfVideos": 32323
-    },
-    {
-      "id": "6493",
-      "title": "notebook",
-      "slug": "notebook",
-      "amountOfVideos": 5645
-    },
-    {
-      "id": "2f19",
-      "title": "livros",
-      "slug": "livros",
-      "amountOfVideos": 3563434
-    },
-    {
-      "id": "ff88",
-      "title": "brinquedos",
-      "slug": "brinquedos",
-      "amountOfVideos": 434
-    },
-    {
-      "id": "a76c",
-      "title": "sapatos",
-      "slug": "sapatos",
-      "amountOfVideos": 336756
-    },
-    {
-      "id": "7b44",
-      "title": "teclado mecanico",
-      "slug": "teclado-mecanico",
-      "amountOfVideos": 1350
-    },
-    {
-      "id": "1b6c",
-      "title": "celular",
-      "slug": "celular",
-      "amountOfVideos": 232
+      "id": "abc1",
+      "title": "3434",
+      "slug": "3434",
+      "amountOfVideos": null
     }
   ]
 }

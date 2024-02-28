@@ -77,7 +77,7 @@ export function CreateTagForm() {
           {...register('amountOfVideos')}
           className="border border-zinc-800 rounded-lg px-3 px-y bg-zinc-800/50 w-full"
           placeholder="$"
-          type="number"
+          type="text"
         />
       </div>
 

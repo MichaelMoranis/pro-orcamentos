@@ -11,6 +11,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CreateTagForm } from './components/create-tag-form'
+import generatePDF, { Margin, Options, Resolution } from 'react-to-pdf';
 
 export interface TagResponse {
   first: number
@@ -28,7 +29,18 @@ export interface Tag {
   amountOfVideos: number
   id: string
 }
-
+const options: Options = {
+  resolution: Resolution.HIGH,
+  method: 'open',
+  page: {
+    // margin is in MM, default is Margin.NONE = 0
+    margin: Margin.SMALL,
+    // default is 'A4'
+    format: 'A4',
+    // default is 'portrait'
+    orientation: 'portrait',
+ },
+}
 
 export function App() {
   const [searchParams, setSeachParams] = useSearchParams()
@@ -63,6 +75,7 @@ export function App() {
       return params
     })
   }
+  const getTargetElement = () => document.getElementById('content');
 
   return (
     <div className='py-10 px-10 space-y-8'>
@@ -100,7 +113,7 @@ export function App() {
         </div>
         <div className='flex items-center justify-between'>
           <div className="flex flex-col gap-2 sm:flex-row">
-            <Input variant='filter'>
+            <Input variant='theme'>
               <Search className="size-3" />
               <Control
                 placeholder="Search tags..."
@@ -108,22 +121,23 @@ export function App() {
                 value={filter}
               />
             </Input>
-            <Button onClick={handleFilter}>
+            <Button variant="primary" onClick={handleFilter}>
               <Filter className="size-3" />
               Filtrar
             </Button>
           </div>
-          <Button>
+          <Button variant='primary' onClick={() => generatePDF(getTargetElement, options)} >
             <FileDown className='size-3' />
-            exportar
+            gerar pdf
           </Button>
         </div>
+        <div id='content'>
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead></TableHead>
-              <TableHead>Produtos</TableHead>
-              <TableHead>Valores dos produtos</TableHead>
+              <TableHead className='text-black'>Produtos</TableHead>
+              <TableHead className='text-black'>Valores dos produtos</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
@@ -138,19 +152,20 @@ export function App() {
                       <span className='text-xs text-zinc-500'>{tag.slug}</span>
                     </div>
                   </TableCell>
-                  <TableCell className='text-zinc-300'>
+                  <TableCell  className='text-blackpn'>
                     $ {tag.amountOfVideos},00
                   </TableCell>
                   <TableCell className='text-right'>
-                    <Button className='icon'>
+                    {/* <Button className='icon'>
                       <MoreHorizontal className='size-3' />
-                    </Button>
+                    </Button> */}
                   </TableCell>
                 </TableRow>
               )
             })}
           </TableBody>
         </Table>
+        </div>
         {tagResponse && <Pagination pages={tagResponse.pages} items={tagResponse.items} page={page} />}
       </main>
     </div>

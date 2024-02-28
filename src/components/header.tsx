@@ -30,7 +30,7 @@ export function Header() {
         </svg>
 
         <div className="flex items-center gap-2.5">
-          <span className="text-sm font-medium text-zinc-100">Mercury</span>
+          <span className="text-sm font-medium text-black">Mercury</span>
           <Badge variant="primary">PRO</Badge>
           <ChevronDown className="text-zinc-600 size-4" />
         </div>
