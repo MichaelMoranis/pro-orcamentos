@@ -10,7 +10,7 @@ export function CreateTagForm() {
     const queryClient = useQueryClient();
   // fazendo validacao de formulario 
   const createTagSchema = z.object({
-    amountOfVideos: z.string(),
+    amountOfVideos: z.number(),
     title: z.string().min(3, { message: 'Minimum 03 characters.' }),
   
   })

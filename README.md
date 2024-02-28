@@ -1,6 +1,6 @@
 # Mercury - solução aplicacao web para prestadores de servicos.
 
-Esta é uma solução para o que desejam gerar seus orcamentos para os demais tipos de sericos, de forma simples, objetiva e intuitiva. 
+Esta é uma solução para o que desejam gerar seus orcamentos para os demais tipos de servicos, de forma simples, objetiva e intuitiva. 
 
 ## Índice
 
@@ -30,14 +30,18 @@ Os usuários desta aplicacao web sao capazes de:
 - Limpar todos os todos concluídos
 - Alternar modo claro e escuro
 
-### Captura de tela
+### Interface da aplicacao.
 
 ![](./src/assets/screenshot.png)
+
+### Barra Lateral com formulario de insercao de produtos.
+
+![](./src/assets/sidebar-form.png)
 
 
 ### Links
 
-- URL da solução: [Adicione o URL da solução aqui](https://your-solution-url.com)
+- URL da solução: [https://github.com/MichaelMoranis/react-na-pratica/tree/main](https://github.com/MichaelMoranis/react-na-pratica/tree/main)
 - URL do site ativo: [Adicione o URL do site ativo aqui](https://your-live-site-url.com)
 
 ## Meu processo
@@ -45,66 +49,89 @@ Os usuários desta aplicacao web sao capazes de:
 ### Construído com
 
 - Marcação HTML5 semântica
-- Propriedades personalizadas CSS
-- Caixa flexível
-- Grade CSS
-- Fluxo de trabalho voltado para dispositivos móveis
+- [Tawind Css](https://tailwindcss.com/) para estilizacao.
+- Fluxo de trabalho com design responsivo voltado para dispositivos móveis e notebooks.
 - [React](https://reactjs.org/) - Biblioteca JS
-- [Next.js](https://nextjs.org/) - Estrutura React
-- [Componentes estilizados](https://styled-components.com/) - Para estilos
-
-**Observação: estes são apenas exemplos. Exclua esta nota e substitua a lista acima por suas próprias escolhas**
+- [Radix UI](https://www.radix-ui.com/) - Uma biblioteca de componentes de código aberto otimizada para desenvolvimento rápido, fácil manutenção e acessibilidade. 
+- [React Hook Form](https://react-hook-form.com/) - Formulários de alto desempenho, flexíveis e extensíveis com validação fácil de usar.
+- [TypeScript](https://www.typescriptlang.org/) - TypeScript SuperSet do Javascript 
+- [Zod](https://styled-components.com/) -  Zod é uma primeira biblioteca de declaração e validação de esquema TypeScript.
 
 ### O que eu aprendi
 
-Use esta seção para recapitular alguns de seus principais aprendizados ao trabalhar neste projeto. Escrevê-los e fornecer exemplos de código das áreas que você deseja destacar é uma ótima maneira de reforçar seu próprio conhecimento.
+Este projeto foi uma continuacao de um projeto desenvolvido pelo Diego da Rockeseat, onde eu dei um rumo bem diferente para a aplicacao, transformando-a em uma aplicacao de geracao de orcamento para prestadores de servicos.
 
-Para ver como você pode adicionar trechos de código, veja abaixo:
+Enfrentei um bug no meu input de preco, que sempre me retornava uma string, e nao era enviado para a "API" json, porque o input sempre eh tratado como string pelo navegador, tava recebendo esse erro utilizando a lib zod: 
 
 ```html
-<h1>Algum código HTML do qual tenho orgulho</h1>
+    <div className="space-y-2">
+        <label className="text-sm font-medium block" htmlFor="amountOfVideos">preco:</label>
+        <input
+          className="border border-zinc-800 rounded-lg px-3 px-y bg-zinc-800/50 w-full"
+          placeholder="$"
+          type="number"
+        />
+      </div>
 ```
-```css
-.orgulhoso-deste-css {
-  cor: chicote de mamão;
-}
-```
-```js
-const orgulhosoOfThisFunc = () => {
-  console.log('🎉')
-}
-```
+mas meu TypeScript com zod estava assim: 
 
-Se você quiser mais ajuda para escrever o markdown, recomendamos conferir o [The Markdown Guide](https://www.markdownguide.org/) para saber mais.
+```ts
+  const createTagSchema = z.object({
+    amountOfVideos: z.number(),
+    title: z.string().min(3, { message: 'Minimum 03 characters.' }),
+  
+  })
+```
+onde existia um bug, sem envio de dados do campo para a api, corrigi-o assim: 
 
-**Observação: exclua esta nota e o conteúdo desta seção e substitua por seus próprios aprendizados.**
+```ts
+  const createTagSchema = z.object({
+    amountOfVideos: z.string(),
+    title: z.string().min(3, { message: 'Minimum 03 characters.' }),
+  })
+  ```
+  e fazendo a conversao no envio para a api: 
+
+  ```ts
+      const { mutateAsync } = useMutation({
+    mutationFn: async ({ title, amountOfVideos }: CreateTagSchema) => {
+
+      await new Promise(resolve => setTimeout(resolve, 1000))
+
+      await fetch('http://localhost:3333/tags', {
+       method: 'Post',
+       body: JSON.stringify({
+         title,
+         slug, 
+         amountOfVideos: Number(amountOfVideos),
+       })
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["get-tags"],
+      })
+    }
+   })
+  ```
+
+  nesta linha: 
+  ```ts
+       amountOfVideos: Number(amountOfVideos),
+  ``` 
+  convertendo a variavel para numero.
+
 
 ### Desenvolvimento contínuo
 
-Use esta seção para delinear áreas nas quais você deseja continuar focando em projetos futuros. Podem ser conceitos com os quais você ainda não está completamente confortável ou técnicas que você achou úteis e que deseja refinar e aperfeiçoar.
+Desejo continuar aprendendo a usar essas ferramentas pois sao de grande valia para o desenvolvimento dos meu projetos, desejo continuar mantendo essa aplicacao, e com ela, conseguir ingressar no mercado de trabalho.
 
-**Observação: exclua esta nota e o conteúdo desta seção e substitua-a por seus próprios planos para desenvolvimento contínuo.**
-
-### Recursos úteis
-
-- [Exemplo de recurso 1](https://www.example.com) - Isso me ajudou pelo motivo XYZ. Gostei muito desse padrão e vou usá-lo daqui para frente.
-- [Exemplo de recurso 2](https://www.example.com) - Este é um artigo incrível que me ajudou a finalmente entender XYZ. Eu recomendo para quem ainda está aprendendo esse conceito.
-
-**Nota: Exclua esta nota e substitua a lista acima por recursos que ajudaram você durante o desafio. Eles podem ser úteis para qualquer pessoa que esteja visualizando sua solução ou para você mesmo quando analisar este projeto no futuro.**
 
 ## Autor
 
-- Site - [Adicione seu nome aqui](https://www.seu-site.com)
-- Mentor de Frontend - [@seunomedeusuário](https://www.frontendmentor.io/profile/seunomedeusuario)
-- Twitter - [@seunomedeusuário](https://www.twitter.com/seunomedeusuário)
+- Site - [ Mercury](https://www.seu-site.com)
+- Twitter - [@moranisdev](https://www.instagram.com/moranisdev)
 
-**Observação: exclua esta nota e adicione/remova/edite as linhas acima com base nos links que você gostaria de compartilhar.**
-
-## Agradecimentos
-
-É aqui que você pode dar uma gorjeta a qualquer pessoa que o ajudou neste projeto. Talvez você tenha trabalhado em equipe ou se inspirado na solução de outra pessoa. Este é o lugar perfeito para dar-lhes algum crédito.
-
-**Nota: Exclua esta nota e edite o conteúdo desta seção conforme necessário. Se você completou este desafio sozinho, sinta-se à vontade para excluir esta seção completamente.**
 
 
 
