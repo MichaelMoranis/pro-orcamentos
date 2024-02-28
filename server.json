@@ -71,6 +71,18 @@
       "title": "sapatos",
       "slug": "sapatos",
       "amountOfVideos": 336756
+    },
+    {
+      "id": "7b44",
+      "title": "teclado mecanico",
+      "slug": "teclado-mecanico",
+      "amountOfVideos": 1350
+    },
+    {
+      "id": "1b6c",
+      "title": "celular",
+      "slug": "celular",
+      "amountOfVideos": 232
     }
   ]
 }
