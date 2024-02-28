@@ -1,10 +1,10 @@
-# Frontend Mentor - solução de aplicativo Todo
+# Mercury - solução aplicacao web para prestadores de servicos.
 
-Esta é uma solução para o [desafio do aplicativo Todo no Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Os desafios do Frontend Mentor ajudam você a melhorar suas habilidades de codificação através da construção de projetos realistas.
+Esta é uma solução para o que desejam gerar seus orcamentos para os demais tipos de sericos, de forma simples, objetiva e intuitiva. 
 
 ## Índice
 
-- [Visão geral](#visão geral)
+- [Visão geral](#visão-geral)
   - [O desafio](#o-desafio)
   - [Captura de tela](#captura de tela)
   - [Links](#links)
@@ -16,35 +16,24 @@ Esta é uma solução para o [desafio do aplicativo Todo no Frontend Mentor](htt
 - [Autor](#autor)
 - [Agradecimentos](#agradecimentos)
 
-**Observação: exclua esta nota e atualize o índice com base nas seções que você mantém.**
-
 ## Visão geral
 
 ### O desafio
 
-Os usuários devem ser capazes de:
+Os usuários desta aplicacao web sao capazes de:
 
-- Veja o layout ideal do aplicativo dependendo do tamanho da tela do dispositivo
+- Ver o layout ideal do aplicativo dependendo do tamanho da tela do dispositivo
 - Veja os estados de foco para todos os elementos interativos na página
-- Adicione novos todos à lista
-- Marcar todos como completos
-- Excluir todos da lista
-- Filtrar por todos/ativos/todos completos
+- Adicione novos produtos à tabela central clicando no botao "gerar orcamento".
+- Excluir produtos da tabela.
+- Filtrar por produtos especificos na tabela.
 - Limpar todos os todos concluídos
 - Alternar modo claro e escuro
-- **Bônus**: arraste e solte para reordenar os itens da lista
 
 ### Captura de tela
 
-![](./captura de tela.jpg)
+![](./src/assets/screenshot.png.jpg)
 
-Adicione uma captura de tela da sua solução. A maneira mais fácil de fazer isso é usar o Firefox para visualizar seu projeto, clicar com o botão direito na página e selecionar “Fazer uma captura de tela”. Você pode escolher uma captura de tela de altura total ou cortada com base no comprimento da página. Se for muito longo, talvez seja melhor cortá-lo.
-
-Alternativamente, você pode usar uma ferramenta como [FireShot](https://getfireshot.com/) para fazer a captura de tela. FireShot tem uma opção gratuita, então você não precisa comprá-la.
-
-Em seguida, corte/otimize/edite sua imagem como desejar, adicione-a ao seu projeto e atualize o caminho do arquivo na imagem acima.
-
-**Nota: Exclua esta nota e os parágrafos acima ao adicionar sua captura de tela. Se preferir não adicionar uma captura de tela, sinta-se à vontade para remover esta seção inteira.**
 
 ### Links
 
