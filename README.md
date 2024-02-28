@@ -47,9 +47,9 @@ Os usuários desta aplicacao web sao capazes de:
 ## Meu processo
 
 ### Construído com
-
+1
 - Marcação HTML5 semântica
-- [Tawind Css](https://tailwindcss.com/) para estilizacao.
+- [Tailwind CSS](https://tailwindcss.com/) para estilizacao.
 - Fluxo de trabalho com design responsivo voltado para dispositivos móveis e notebooks.
 - [React](https://reactjs.org/) - Biblioteca JS
 - [Radix UI](https://www.radix-ui.com/) - Uma biblioteca de componentes de código aberto otimizada para desenvolvimento rápido, fácil manutenção e acessibilidade. 
@@ -130,7 +130,7 @@ Desejo continuar aprendendo a usar essas ferramentas pois sao de grande valia pa
 ## Autor
 
 - Site - [ Mercury](https://www.seu-site.com)
-- Twitter - [@moranisdev](https://www.instagram.com/moranisdev)
+- Instagram - [@moranisdev](https://www.instagram.com/moranisdev)
 
 
 
