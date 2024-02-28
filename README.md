@@ -32,7 +32,7 @@ Os usuários desta aplicacao web sao capazes de:
 
 ### Captura de tela
 
-![](./src/assets/screenshot.png.jpg)
+![](./src/assets/screenshot.png)
 
 
 ### Links
