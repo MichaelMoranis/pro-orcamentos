@@ -6,7 +6,6 @@ Esta é uma solução para o que desejam gerar seus orcamentos para os demais ti
 
 - [Visão geral](#visão-geral)
   - [O desafio](#o-desafio)
-  - [Captura de tela](#captura-de-tela)
   - [Links](#links)
 - [Meu processo](#meu-processo)
   - [Construído com](#construído-com)
