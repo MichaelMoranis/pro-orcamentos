@@ -9,8 +9,8 @@ Esta é uma solução para o que desejam gerar seus orcamentos para os demais ti
   - [Captura de tela](#captura-de-tela)
   - [Links](#links)
 - [Meu processo](#meu-processo)
-  - [Construído com](#construídocom)
-  - [O que aprendi](#o-que-aprendi)
+  - [Construído com](#construído-com)
+  - [O que aprendi](#o-que-eu-aprendi)
   - [Desenvolvimento contínuo](#desenvolvimento-contínuo)
 - [Autor](#autor)
 
