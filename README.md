@@ -6,15 +6,13 @@ Esta é uma solução para o que desejam gerar seus orcamentos para os demais ti
 
 - [Visão geral](#visão-geral)
   - [O desafio](#o-desafio)
-  - [Captura de tela](#captura de tela)
+  - [Captura de tela](#captura-de-tela)
   - [Links](#links)
 - [Meu processo](#meu-processo)
-  - [Construído com](#construído com)
-  - [O que aprendi](#o que aprendi)
-  - [Desenvolvimento contínuo](#desenvolvimento contínuo)
-  - [Recursos úteis](#useful-resources)
+  - [Construído com](#construídocom)
+  - [O que aprendi](#o-que-aprendi)
+  - [Desenvolvimento contínuo](#desenvolvimento-contínuo)
 - [Autor](#autor)
-- [Agradecimentos](#agradecimentos)
 
 ## Visão geral
 
