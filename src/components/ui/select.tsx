@@ -19,7 +19,7 @@ export function SelectTrigger({ className, ...props }: SelectTriggerProps) {
   return (
     <SelectPrimitive.Trigger
       className={twMerge(
-        'px-3 py-1.5 text-zinc-100 tabular-nums rounded-md border border-zinc-800 bg-zinc-800/50 flex items-center gap-2.5',
+        'px-3 py-1.5 text-zinc-700 tabular-nums rounded-md border border-zinc-800 bg-zinc-200 flex items-center gap-2.5',
         className,
       )}
       {...props}

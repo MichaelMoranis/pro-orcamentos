@@ -29,6 +29,24 @@
       "title": "3434",
       "slug": "3434",
       "amountOfVideos": null
+    },
+    {
+      "id": "fcc7",
+      "title": "maquina de lavar",
+      "slug": "maquina-de-lavar",
+      "amountOfVideos": 1340
+    },
+    {
+      "id": "b635",
+      "title": "mesa com quatro cadeiras",
+      "slug": "mesa-com-quatro-cadeiras",
+      "amountOfVideos": 2320
+    },
+    {
+      "id": "a14a",
+      "title": "sofa",
+      "slug": "sofa",
+      "amountOfVideos": 3450
     }
   ]
 }

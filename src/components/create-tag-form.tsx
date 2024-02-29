@@ -60,10 +60,10 @@ export function CreateTagForm() {
   return (
     <form onSubmit={handleSubmit(createTag)} className="w-full space-y-6">
       <div className="space-y-2">
-        <label className="text-sm font-medium block" htmlFor="title">Nome do produto:</label>
+        <label className="text-sm font-medium block text-zinc-800" htmlFor="title">Nome do produto:</label>
         <input
           {...register('title')}
-          className="border border-zinc-800 rounded-lg px-3 px-y bg-zinc-800/50 w-full"
+          className="border border-indigo-400 rounded-lg px-3 px-y bg-zinc-400/50 w-full"
           id="name"
           type="text"
         />
@@ -72,19 +72,19 @@ export function CreateTagForm() {
         )}
       </div>
       <div className="space-y-2">
-        <label className="text-sm font-medium block" htmlFor="amountOfVideos">preco:</label>
+        <label className="text-sm font-medium block text-zinc-800" htmlFor="amountOfVideos">preco:</label>
         <input
           {...register('amountOfVideos')}
-          className="border border-zinc-800 rounded-lg px-3 px-y bg-zinc-800/50 w-full"
+          className="border border-indigo-400 rounded-lg px-3 px-y bg-zinc-400/50 w-full"
           placeholder="$"
           type="text"
         />
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium block" htmlFor="slug">produto:</label>
+        <label className="text-sm font-medium block text-zinc-800" htmlFor="slug">produto:</label>
         <input
-          className="border border-zinc-800 rounded-lg px-3 px-y bg-zinc-800/50 w-full"
+          className="border border-indigo-400 rounded-lg px-3 px-y bg-zinc-400/50 w-full"
           id="slug"
           type="text"
           value={slug}
@@ -92,12 +92,12 @@ export function CreateTagForm() {
       </div>
       <div className="flex items-center justify-end gap-2">
         <Dialog.Close asChild>
-          <Button>
+          <Button className="bg-indigo-500 border-indigo-400 text-zinc-200 text-sm">
             <X className="size-3" />
             Cancel
           </Button>
         </Dialog.Close>
-        <Button disabled={formState.isSubmitting} className=" bg-teal-400 text-teal-950" type="submit">
+        <Button disabled={formState.isSubmitting} className=" bg-indigo-500 border-indigo-400 text-zinc-200 text-sm" type="submit">
           {formState.isSubmitting ? <Loader2 className='size-3 animate-spin' /> :  <Check className="size-3" />}
           Save
         </Button>

@@ -3,19 +3,19 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 const input = tv({
   slots: {
-    root: 'border border-zinc-700 bg-zinc-800/50',
-    control: 'placeholder-zinc-500 text-zinc-100',
+    root: 'border border-zinc-900 bg-zinc-white',
+    control: 'placeholder-white text-zinc-800 text-xs',
   },
 
   variants: {
     variant: {
       default: {},
       filter: {
-        root: 'rounded-full py-1.5 px-3 flex items-center gap-1.5 text-xs text-zinc-500 leading-tight border-dashed focus-within:border-zinc-600',
+        root: 'rounded-full py-1.5 px-3 flex items-center gap-1.5 text-1xl text-zinc-500 leading-tight focus-within:border-zinc-600',
         control: 'bg-transparent flex-1 outline-none',
       },
       theme: {
-        root: 'rounded-full py-1.5 px-3 flex items-center gap-1.5 text-xs text-black leading-tight  focus-within:border-zinc-200',
+        root: 'rounded-full py-1.5 px-3 flex items-center gap-1.5 text-1xl text-black leading-tight  focus-within:border-zinc-200',
         control: 'bg-transparent flex-1 outline-none',
       },
     },

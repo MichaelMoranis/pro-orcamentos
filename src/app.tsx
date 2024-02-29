@@ -1,5 +1,5 @@
 import './app.css'
-import { Plus, Search, FileDown, Filter, MoreHorizontal } from "lucide-react"
+import { Plus, Search, FileDown, Filter, } from "lucide-react"
 import { Header } from './components/header'
 import { Tabs } from './components/tabs'
 import { Button } from './components/ui/button'
@@ -85,7 +85,7 @@ export function App() {
       </div>
       <main className='max-w-6xl mx-auto space-y-5'>
         <div className='flex items-center gap-3'>
-          <h1 className='text-xl font-bold'>Orçamento</h1>
+          {/* <h1 className='text-xl font-bold'>Orçamento</h1> */}
           <Dialog.Root>
             <Dialog.DialogTrigger asChild>
               <Button variant='primary'>
@@ -96,12 +96,12 @@ export function App() {
 
             <Dialog.Portal>
               <Dialog.Overlay className='fixed inset-0 bg-black/70' />
-              <Dialog.Content className='fixed p-10 space-y-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-l border-zinc-900'>
+              <Dialog.Content className='fixed p-10 space-y-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-200 border-l border-zinc-900'>
                 <div className='space-y-3'>
-                  <Dialog.Title className='font-xl font-bold'>
+                  <Dialog.Title className='text-2xl font-bold text-zinc-800'>
                     Criar produtos
                   </Dialog.Title>
-                  <Dialog.Description className='text-sm text-zinc-500'>
+                  <Dialog.Description className='text-md text-zinc-800'>
                    tabela para criacao de produtos
                   </Dialog.Description>
                 </div>
@@ -113,7 +113,7 @@ export function App() {
         </div>
         <div className='flex items-center justify-between'>
           <div className="flex flex-col gap-2 sm:flex-row">
-            <Input variant='theme'>
+            <Input variant='filter'>
               <Search className="size-3" />
               <Control
                 placeholder="Search tags..."
