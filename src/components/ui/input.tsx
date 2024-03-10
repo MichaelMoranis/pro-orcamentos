@@ -11,7 +11,7 @@ const input = tv({
     variant: {
       default: {},
       filter: {
-        root: 'rounded-full py-1.5 px-3 flex items-center gap-1.5 text-1xl text-zinc-500 leading-tight focus-within:border-zinc-600',
+        root: 'rounded-full py-1.5 px-3 w-40 flex items-center gap-1.5 text-1xl text-zinc-500 leading-tight focus-within:border-zinc-600',
         control: 'bg-transparent flex-1 outline-none',
       },
       theme: {

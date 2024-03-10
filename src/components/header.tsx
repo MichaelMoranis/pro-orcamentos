@@ -32,7 +32,7 @@ export function Header() {
         </div>
       </div>
       <div>
-        <h1 className='font-bold text-xl'>Gerenciador de Orcamentos</h1>
+        <h1 className='font-bold text-4xl hidden lg:block'>Gerenciador de Orçamentos</h1>
       </div>
       <div className="flex items-center gap-3">
         <div className="flex flex-col items-end gap-0.5">
