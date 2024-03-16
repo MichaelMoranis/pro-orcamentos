@@ -12,7 +12,8 @@ import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CreateTagForm } from './components/create-tag-form'
 import generatePDF, { Margin, Options, Resolution } from 'react-to-pdf';
-import { useQueryClient } from "@tanstack/react-query";
+import { firebaseConfig } from './dataFireBase'
+import { collection, getDocs, getFirestore } from 'firebase/firestore'
 
 export interface TagResponse {
   first: number
@@ -21,15 +22,14 @@ export interface TagResponse {
   last: number
   pages: number
   items: number
-  data: Tag[]
 }
 
-export interface Tag {
-  title: string
-  slug: string
-  amountOfProducts: number
-  id: string
-}
+// export interface Tag {
+//   title: string
+//   slug: string
+//   amountOfProducts: number
+//   id: string
+// }
 const options: Options = {
   resolution: Resolution.HIGH,
   method: 'open',
@@ -43,6 +43,8 @@ const options: Options = {
   },
 }
 
+
+
 export function App() {
   const [searchParams, setSeachParams] = useSearchParams()
   const ulrFilter = searchParams.get('filter') ?? ''
@@ -51,15 +53,29 @@ export function App() {
 
   const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1
 
-  const { data: tagResponse, isLoading } = useQuery<TagResponse>({
+
+  const db = getFirestore(firebaseConfig);
+  const tagsRef = collection(db, "tags");
+
+    const getTags = async () => {
+      const data = await getDocs(tagsRef);
+      const dataFireBase = (data.docs.map((doc) => ({  
+        title: doc.data().title,
+        slug: doc.data().slug,
+        amountOfProducts: doc.data().amountOfProducts, id: doc.id})))
+      console.log(dataFireBase)
+      return dataFireBase
+  }
+
+  const { data: tagResponse, isLoading } = useQuery({
     queryKey: ['get-tags', ulrFilter, page],
     queryFn: async () => {
-      const response = await fetch(`http://localhost:3333/tags?_page=${page}&_per_page&title=${ulrFilter}`)
-      const data = await response.json()
-
-      await new Promise(resolve => setTimeout(resolve, 1000))
-
-      return data
+      try {
+        const data = await getTags();
+        return data;
+      } catch (error) {
+        throw new Error('Erro ao buscar dados: ' + error);
+      }
     },
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60,
@@ -77,69 +93,6 @@ export function App() {
     })
   }
   const getTargetElement = () => document.getElementById('content');
-
-  const queryClient = useQueryClient();
-
-  async function getTagId() {
-    try {
-      const response = await fetch('http://localhost:3333/tags', {
-        method: 'GET',
-      })
-      if (!response.ok) {
-        throw new Error('Erro ao buscar dados');
-      }
-      const responseData = await response.json()
-      return responseData
-
-    } catch (error) {
-      console.error('Erro  ao buscar dados:', error);
-    }
-  }
-   function removeTagsForId(id: string) {
-    // try {
-    //   const response = await fetch('http://localhost:3333/tags', {
-    //     method: 'GET',        
-    //   });
-  
-    //   if (!response.ok) {
-    //     throw new Error('Erro ao buscar dados');
-    //   }
-  
-    //   const data: Tag[] = await response.json();
-    //   let dataTagId = data[0].id;
-      deleteTag(id)
-    
-    // } catch (error) {
-    //   console.error('Erro ao buscar dados:', error);
-    // }
-  }
-  async function deleteData() {
-    try {
-      const data: Tag[] = await getTagId();
-      // Faça algo com os dados aqui
-      data.forEach(tag => {
-        deleteTag(tag.id)
-      })
-    } catch (error) {
-      // Lidar com o erro aqui
-      console.error('Erro ao processar os dados:', error);
-    }
-  }
-
-  async function deleteTag(id: string): Promise<void> {
-    try {
-      await fetch(`http://localhost:3333/tags/${id}`, {
-        method: 'DELETE',
-      });
-      // Se a exclusão for bem-sucedida, você pode querer atualizar a lista de tags
-      queryClient.invalidateQueries({
-        queryKey: ["get-tags"],
-      });
-    } catch (error) {
-      // Lidar com erros de solicitação, se necessário
-      console.error('Erro ao excluir a tag:', error);
-    }
-  }
 
 
   return (
@@ -203,7 +156,7 @@ export function App() {
               </Button>
             </div>
             <div>
-              <Button variant='primary' onClick={() => deleteData()}>
+              <Button variant='primary'>
                 <FileDown className='size-3' />
                 excluir tudo
               </Button>
@@ -221,7 +174,7 @@ export function App() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {tagResponse?.data.map((tag) => {
+              {tagResponse?.map((tag) => {
                 return (
                   <TableRow key={tag.id}>
                     <TableCell></TableCell>
@@ -235,7 +188,7 @@ export function App() {
                       $ {tag.amountOfProducts},00
                     </TableCell>
                     <TableCell className='text-right'>
-                      <Button className='icon' onClick={() => removeTagsForId(tag.id)}>
+                      <Button className='icon'>
                         X
                       </Button>
                     </TableCell>
@@ -245,7 +198,7 @@ export function App() {
             </TableBody>
           </Table>
         </div>
-        {tagResponse && <Pagination pages={tagResponse.pages} items={tagResponse.items} page={page} />}
+        {/* {tagResponse && <Pagination pages={tagResponse.pages} items={tagResponse.items} page={page} />} */}
       </main>
     </div>
   )

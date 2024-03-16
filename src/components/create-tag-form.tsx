@@ -5,6 +5,8 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as Dialog from '@radix-ui/react-dialog'
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {collection, addDoc, getFirestore} from "firebase/firestore"
+import { firebaseConfig } from "../dataFireBase";
 
 export function CreateTagForm() {
   const queryClient = useQueryClient();
@@ -14,6 +16,19 @@ export function CreateTagForm() {
     title: z.string().min(3, { message: 'Minimum 03 characters.' }),
 
   })
+
+  const db = getFirestore(firebaseConfig)
+  const userColectionRef = collection(db, "tags");
+
+
+  async function createTags({title, amountOfProducts}: CreateTagSchema) {
+    const slug = getSlugFromString(title);
+    await addDoc(userColectionRef, {
+      title, 
+      amountOfProducts,
+      slug
+    })
+  }
 
   // inferencia de tipo a partir de uma variavel existente
   type CreateTagSchema = z.infer<typeof createTagSchema>
@@ -36,14 +51,7 @@ export function CreateTagForm() {
 
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      await fetch('http://localhost:3333/tags', {
-        method: 'Post',
-        body: JSON.stringify({
-          title,
-          slug,
-          amountOfProducts: Number(amountOfProducts),
-        })
-      })
+      createTags({title, amountOfProducts })
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -51,11 +59,12 @@ export function CreateTagForm() {
       })
     }
   })
+  const slug = watch('title') ? getSlugFromString(watch('title')) : ''
 
   async function createTag({ title, amountOfProducts }: CreateTagSchema) {
-    await mutateAsync({ title, amountOfProducts });
+    await mutateAsync({ title, amountOfProducts});
   }
-  const slug = watch('title') ? getSlugFromString(watch('title')) : ''
+
 
   return (
     <form onSubmit={handleSubmit(createTag)} className="w-full space-y-6">
