@@ -5,15 +5,15 @@ import { Tabs } from './components/tabs'
 import { Button } from './components/ui/button'
 import { Control, Input } from './components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table'
-import { useQuery, keepPreviousData } from '@tanstack/react-query'
-import { Pagination } from './components/pagination'
+import { useQuery, keepPreviousData, useQueryClient } from '@tanstack/react-query'
+// import { Pagination } from './components/pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CreateTagForm } from './components/create-tag-form'
 import generatePDF, { Margin, Options, Resolution } from 'react-to-pdf';
 import { firebaseConfig } from './dataFireBase'
-import { collection, getDocs, getFirestore } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore'
 
 export interface TagResponse {
   first: number
@@ -32,7 +32,7 @@ export interface TagResponse {
 // }
 const options: Options = {
   resolution: Resolution.HIGH,
-  method: 'open',
+  method: 'save',
   page: {
     // margin is in MM, default is Margin.NONE = 0
     margin: Margin.SMALL,
@@ -57,15 +57,31 @@ export function App() {
   const db = getFirestore(firebaseConfig);
   const tagsRef = collection(db, "tags");
 
-    const getTags = async () => {
-      const data = await getDocs(tagsRef);
-      const dataFireBase = (data.docs.map((doc) => ({  
-        title: doc.data().title,
-        slug: doc.data().slug,
-        amountOfProducts: doc.data().amountOfProducts, id: doc.id})))
-      console.log(dataFireBase)
-      return dataFireBase
+  const getTags = async () => {
+    const data = await getDocs(tagsRef);
+    const dataFireBase = (data.docs.map((doc) => ({
+      title: doc.data().title,
+      slug: doc.data().slug,
+      amountOfProducts: doc.data().amountOfProducts, id: doc.id
+    })))
+    return dataFireBase
   }
+  const queryClient = useQueryClient();
+
+  async function deleteTag(id: string): Promise<void> {
+    try {
+      const userDoc = doc(db, "tags", id);
+      await deleteDoc(userDoc);
+      // Se a exclusão for bem-sucedida, você pode querer atualizar a lista de tags
+      queryClient.invalidateQueries({
+        queryKey: ["get-tags"],
+      });
+    } catch (error) {
+      // Lidar com erros de solicitação, se necessário
+      console.error('Erro ao excluir a tag:', error);
+    }
+  }
+
 
   const { data: tagResponse, isLoading } = useQuery({
     queryKey: ['get-tags', ulrFilter, page],
@@ -188,7 +204,7 @@ export function App() {
                       $ {tag.amountOfProducts},00
                     </TableCell>
                     <TableCell className='text-right'>
-                      <Button className='icon'>
+                      <Button className='icon' onClick={() => deleteTag(tag.id)}>
                         X
                       </Button>
                     </TableCell>
