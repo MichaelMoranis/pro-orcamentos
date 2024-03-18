@@ -133,10 +133,10 @@ export function App() {
               <Dialog.Content className='fixed p-10 space-y-10 right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-indigo-100 border-l border-zinc-900'>
                 <div className='space-y-3'>
                   <Dialog.Title className='text-2xl font-bold text-zinc-800'>
-                    Adicionar novos produtos.
+                    Adicionar novos itens no orcamento.
                   </Dialog.Title>
                   <Dialog.Description className='text-md text-zinc-800'>
-                    Inclua na tabela os seus produtos.
+                    Inclua na tabela os seus itens.
                   </Dialog.Description>
                 </div>
                 <CreateTagForm />

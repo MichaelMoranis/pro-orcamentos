@@ -69,7 +69,7 @@ export function CreateTagForm() {
   return (
     <form onSubmit={handleSubmit(createTag)} className="w-full space-y-6">
       <div className="space-y-2">
-        <label className="text-sm font-medium block text-zinc-800" htmlFor="title">Nome do produto:</label>
+        <label className="text-sm font-medium block text-zinc-800" htmlFor="title">Nome do Item:</label>
         <input
           {...register('title')}
           className="border border-indigo-400 rounded-lg px-3 px-y bg-zinc-400/50 w-full"
@@ -91,7 +91,7 @@ export function CreateTagForm() {
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium block text-zinc-800" htmlFor="slug">produto:</label>
+        <label className="text-sm font-medium block text-zinc-800" htmlFor="slug">item:</label>
         <input
           className="border border-indigo-400 rounded-lg px-3 px-y bg-zinc-400/50 w-full"
           id="slug"
@@ -103,12 +103,12 @@ export function CreateTagForm() {
         <Dialog.Close asChild>
           <Button className="bg-indigo-500 border-indigo-400 text-zinc-200 text-sm">
             <X className="size-3" />
-            Cancel
+            voltar
           </Button>
         </Dialog.Close>
         <Button disabled={formState.isSubmitting} className=" bg-indigo-500 border-indigo-400 text-zinc-200 text-sm" type="submit">
           {formState.isSubmitting ? <Loader2 className='size-3 animate-spin' /> : <Check className="size-3" />}
-          Save
+          salvar
         </Button>
       </div>
     </form>
