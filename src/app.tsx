@@ -6,14 +6,14 @@ import { Button } from './components/ui/button'
 import { Control, Input } from './components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table'
 import { useQuery, keepPreviousData, useQueryClient } from '@tanstack/react-query'
-import { Pagination } from './components/pagination'
+// import { Pagination } from './components/pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CreateTagForm } from './components/create-tag-form'
 import generatePDF, { Margin, Options, Resolution } from 'react-to-pdf';
 import { firebaseConfig } from './dataFireBase'
-import { collection, deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDocs, getFirestore, } from 'firebase/firestore'
 
 export interface TagResponse {
   first: number
@@ -32,7 +32,7 @@ export interface TagResponse {
 // }
 const options: Options = {
   resolution: Resolution.HIGH,
-  method: 'save',
+  method: 'open',
   page: {
     // margin is in MM, default is Margin.NONE = 0
     margin: Margin.SMALL,
@@ -47,6 +47,7 @@ const options: Options = {
 
 export function App() {
   const [searchParams, setSeachParams] = useSearchParams()
+  const [clicked, setIsClicked] = useState(false)
   const ulrFilter = searchParams.get('filter') ?? ''
 
   const [filter, setFilter] = useState(ulrFilter);
@@ -71,6 +72,20 @@ export function App() {
   async function deleteTag(id: string): Promise<void> {
     try {
       const userDoc = doc(db, "tags", id);
+      await deleteDoc(userDoc);
+      // Se a exclusão for bem-sucedida, você pode querer atualizar a lista de tags
+      queryClient.invalidateQueries({
+        queryKey: ["get-tags"],
+      });
+    } catch (error) {
+      // Lidar com erros de solicitação, se necessário
+      console.error('Erro ao excluir a tag:', error);
+    }
+  }
+
+  async function deleteAllTag(): Promise<void> {
+    try {
+      const userDoc = doc(db, "tags");
       await deleteDoc(userDoc);
       // Se a exclusão for bem-sucedida, você pode querer atualizar a lista de tags
       queryClient.invalidateQueries({
@@ -109,6 +124,13 @@ export function App() {
     })
   }
   const getTargetElement = () => document.getElementById('content');
+
+  function generatePDFTable() {
+    setIsClicked(true)
+    if(clicked) {
+      generatePDF(getTargetElement, options)
+    }
+  }
 
 
   return (
@@ -166,14 +188,14 @@ export function App() {
           </div>
           <div className='flex gap-2'>
             <div>
-              <Button variant='primary' onClick={() => generatePDF(getTargetElement, options)} >
+              <Button variant='primary' onClick={() => generatePDFTable()} >
                 <FileDown className='size-3' />
                 gerar pdf
               </Button>
             </div>
             <div>
               <Button variant='primary'>
-                <FileDown className='size-3' />
+                <FileDown className='size-3' onClick={() => deleteAllTag()} />
                 excluir tudo
               </Button>
             </div>
@@ -204,7 +226,8 @@ export function App() {
                       $ {tag.amountOfProducts},00
                     </TableCell>
                     <TableCell className='text-right'>
-                      <Button className='icon' onClick={() => deleteTag(tag.id)}>
+                      <Button className={`icon ${clicked ? 'hidden' : ''}`} onClick={() => 
+                        deleteTag(tag.id)}>
                         X
                       </Button>
                     </TableCell>
@@ -214,7 +237,7 @@ export function App() {
             </TableBody>
           </Table>
         </div>
-        {tagResponse && <Pagination pages={tagResponse.pages} items={tagResponse.items} page={page} />}
+        {/* {tagResponse && <Pagination pages={tagResponse.pages} items={tagResponse.items} page={page} />} */}
       </main>
     </div>
   )

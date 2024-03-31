@@ -13,7 +13,7 @@ const button = tv({
     },
     size: {
       default: '',
-      icon: 'p-1.5',
+      icon: 'p-1.5 display-block',
     },
   },
 
