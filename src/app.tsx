@@ -6,7 +6,7 @@ import { Button } from './components/ui/button'
 import { Control, Input } from './components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table'
 import { useQuery, keepPreviousData, useQueryClient } from '@tanstack/react-query'
-// import { Pagination } from './components/pagination'
+import { Pagination } from './components/pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -214,7 +214,7 @@ export function App() {
             </TableBody>
           </Table>
         </div>
-        {/* {tagResponse && <Pagination pages={tagResponse.pages} items={tagResponse.items} page={page} />} */}
+        {tagResponse && <Pagination pages={tagResponse.pages} items={tagResponse.items} page={page} />}
       </main>
     </div>
   )
