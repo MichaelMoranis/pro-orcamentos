@@ -6,14 +6,15 @@ import { Button } from './components/ui/button'
 import { Control, Input } from './components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table'
 import { useQuery, keepPreviousData, useQueryClient } from '@tanstack/react-query'
-// import { Pagination } from './components/pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CreateTagForm } from './components/create-tag-form'
-import generatePDF, { Margin, Options, Resolution } from 'react-to-pdf';
 import { firebaseConfig } from './dataFireBase'
 import { collection, deleteDoc, doc, getDocs, getFirestore, } from 'firebase/firestore'
+import { jsPDF } from 'jspdf'
+import 'jspdf-autotable'
+
 
 export interface TagResponse {
   first: number
@@ -23,27 +24,6 @@ export interface TagResponse {
   pages: number
   items: number
 }
-
-// export interface Tag {
-//   title: string
-//   slug: string
-//   amountOfProducts: number
-//   id: string
-// }
-const options: Options = {
-  resolution: Resolution.HIGH,
-  method: 'open',
-  page: {
-    // margin is in MM, default is Margin.NONE = 0
-    margin: Margin.SMALL,
-    // default is 'A4'
-    format: 'A4',
-    // default is 'portrait'
-    orientation: 'portrait',
-  },
-}
-
-
 
 export function App() {
   const [searchParams, setSeachParams] = useSearchParams()
@@ -73,7 +53,6 @@ export function App() {
     try {
       const userDoc = doc(db, "tags", id);
       await deleteDoc(userDoc);
-      // Se a exclusão for bem-sucedida, você pode querer atualizar a lista de tags
       queryClient.invalidateQueries({
         queryKey: ["get-tags"],
       });
@@ -87,7 +66,6 @@ export function App() {
     try {
       const userDoc = doc(db, "tags");
       await deleteDoc(userDoc);
-      // Se a exclusão for bem-sucedida, você pode querer atualizar a lista de tags
       queryClient.invalidateQueries({
         queryKey: ["get-tags"],
       });
@@ -123,13 +101,14 @@ export function App() {
       return params
     })
   }
-  const getTargetElement = () => document.getElementById('content');
 
   function generatePDFTable() {
     setIsClicked(true)
-    if(clicked) {
-      generatePDF(getTargetElement, options)
-    }
+    const doc = new jsPDF()
+    doc.autoTable({ 
+      html: '#my-table' 
+    })
+    doc.save('table.pdf')
   }
 
 
@@ -201,8 +180,7 @@ export function App() {
             </div>
           </div>
         </div>
-        <div id='content'>
-          <Table>
+          <Table id='my-table'>
             <TableHeader>
               <TableRow>
                 <TableHead></TableHead>
@@ -236,7 +214,6 @@ export function App() {
               })}
             </TableBody>
           </Table>
-        </div>
         {/* {tagResponse && <Pagination pages={tagResponse.pages} items={tagResponse.items} page={page} />} */}
       </main>
     </div>

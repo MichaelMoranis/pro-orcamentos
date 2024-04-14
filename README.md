@@ -1,4 +1,4 @@
-# Mercury - solução aplicacao web para prestadores de servicos.
+# Netuno -  aplicacao web para prestadores de servicos.
 
 Esta é uma solução para o que desejam gerar seus orcamentos para os demais tipos de servicos, de forma simples, objetiva e intuitiva. 
 
@@ -126,7 +126,7 @@ Desejo continuar aprendendo a usar essas ferramentas pois sao de grande valia pa
 
 ## Autor
 
-- Site - [ Mercury](https://www.seu-site.com)
+- Site - [Netuno](https://www.seu-site.com)
 - Instagram - [@moranisdev](https://www.instagram.com/moranisdev)
 
 
