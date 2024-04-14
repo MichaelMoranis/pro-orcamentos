@@ -103,7 +103,7 @@ export function App() {
   }
 
   function generatePDFTable() {
-    setIsClicked(true)
+    // setIsClicked(true)
     const doc = new jsPDF()
     doc.autoTable({ 
       html: '#my-table' 

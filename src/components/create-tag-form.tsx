@@ -22,27 +22,18 @@ export function CreateTagForm() {
 
 
   async function createTags({title, amountOfProducts}: CreateTagSchema) {
-    const slug = getSlugFromString(title);
+    // funcao que envia dados para o banco de dados firestore
     await addDoc(userColectionRef, {
       title, 
       amountOfProducts,
-      slug
     })
   }
 
   // inferencia de tipo a partir de uma variavel existente
   type CreateTagSchema = z.infer<typeof createTagSchema>
 
-  function getSlugFromString(input: string): string {
-    return input
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .replace(/[^\w\s]/g, '')
-      .replace(/\s+/g, '-');
-  }
 
-  const { register, handleSubmit, watch, formState, } = useForm<CreateTagSchema>({
+  const { register, handleSubmit, formState, } = useForm<CreateTagSchema>({
     resolver: zodResolver(createTagSchema)
   })
 
@@ -59,7 +50,6 @@ export function CreateTagForm() {
       })
     }
   })
-  const slug = watch('title') ? getSlugFromString(watch('title')) : ''
 
   async function createTag({ title, amountOfProducts }: CreateTagSchema) {
     await mutateAsync({ title, amountOfProducts});
@@ -90,15 +80,6 @@ export function CreateTagForm() {
         />
       </div>
 
-      <div className="space-y-2">
-        <label className="text-sm font-medium block text-zinc-800" htmlFor="slug">item:</label>
-        <input
-          className="border border-indigo-400 rounded-lg px-3 px-y bg-zinc-400/50 w-full"
-          id="slug"
-          type="text"
-          value={slug}
-          readOnly />
-      </div>
       <div className="flex items-center justify-end gap-2">
         <Dialog.Close asChild>
           <Button className="bg-indigo-500 border-indigo-400 text-zinc-200 text-sm">
