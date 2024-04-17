@@ -12,8 +12,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { CreateTagForm } from './components/create-tag-form'
 import { firebaseConfig } from './dataFireBase'
 import { collection, deleteDoc, doc, getDocs, getFirestore, } from 'firebase/firestore'
-import { jsPDF } from 'jspdf'
-import 'jspdf-autotable'
+import  jsPDF from 'jspdf'
 
 
 export interface TagResponse {
@@ -27,7 +26,6 @@ export interface TagResponse {
 
 export function App() {
   const [searchParams, setSeachParams] = useSearchParams()
-  const [clicked, setIsClicked] = useState(false)
   const ulrFilter = searchParams.get('filter') ?? ''
 
   const [filter, setFilter] = useState(ulrFilter);
@@ -103,7 +101,6 @@ export function App() {
   }
 
   function generatePDFTable() {
-    // setIsClicked(true)
     const doc = new jsPDF()
     doc.autoTable({ 
       html: '#my-table' 
@@ -203,7 +200,7 @@ export function App() {
                       $ {tag.amountOfProducts},00
                     </TableCell>
                     <TableCell className='text-right'>
-                      <Button className={`icon ${clicked ? 'hidden' : ''}`} onClick={() => 
+                      <Button className='icon' onClick={() => 
                         deleteTag(tag.id)}>
                         X
                       </Button>
