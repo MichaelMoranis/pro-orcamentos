@@ -13,6 +13,7 @@ import { CreateTagForm } from './components/create-tag-form'
 import { firebaseConfig } from './dataFireBase'
 import { collection, deleteDoc, doc, getDocs, getFirestore, } from 'firebase/firestore'
 import  jsPDF from 'jspdf'
+import autoTable from "jspdf-autotable"
 
 
 export interface TagResponse {
@@ -102,7 +103,7 @@ export function App() {
 
   function generatePDFTable() {
     const doc = new jsPDF()
-    doc.autoTable({ 
+    autoTable(doc, { 
       html: '#my-table' 
     })
     doc.save('table.pdf')
