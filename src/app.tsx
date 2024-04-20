@@ -41,8 +41,7 @@ export function App() {
     const data = await getDocs(tagsRef);
     const dataFireBase = (data.docs.map((doc) => ({
       title: doc.data().title,
-      slug: doc.data().slug,
-      amountOfProducts: doc.data().amountOfProducts, id: doc.id
+      valueProducts: doc.data().valueProducts, id: doc.id
     })))
     return dataFireBase
   }
@@ -198,10 +197,10 @@ export function App() {
                       </div>
                     </TableCell>
                     <TableCell className='text-blackpn'>
-                      $ {tag.amountOfProducts},00
+                      $ {tag.valueProducts},00
                     </TableCell>
                     <TableCell className='text-right'>
-                      <Button className='icon' onClick={() => 
+                      <Button className='bg-red-600' onClick={() => 
                         deleteTag(tag.id)}>
                         X
                       </Button>

@@ -12,7 +12,7 @@ export function CreateTagForm() {
   const queryClient = useQueryClient();
   // fazendo validacao de formulario 
   const createTagSchema = z.object({
-    amountOfProducts: z.string(),
+    valueProducts: z.string(),
     title: z.string().min(3, { message: 'Minimum 03 characters.' }),
 
   })
@@ -21,11 +21,11 @@ export function CreateTagForm() {
   const userColectionRef = collection(db, "tags");
 
 
-  async function createTags({title, amountOfProducts}: CreateTagSchema) {
+  async function createTags({title, valueProducts}: CreateTagSchema) {
     // funcao que envia dados para o banco de dados firestore
     await addDoc(userColectionRef, {
       title, 
-      amountOfProducts,
+      valueProducts,
     })
   }
 
@@ -38,11 +38,11 @@ export function CreateTagForm() {
   })
 
   const { mutateAsync } = useMutation({
-    mutationFn: async ({ title, amountOfProducts }: CreateTagSchema) => {
+    mutationFn: async ({ title, valueProducts }: CreateTagSchema) => {
 
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      createTags({title, amountOfProducts })
+      createTags({title, valueProducts })
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -51,8 +51,8 @@ export function CreateTagForm() {
     }
   })
 
-  async function createTag({ title, amountOfProducts }: CreateTagSchema) {
-    await mutateAsync({ title, amountOfProducts});
+  async function createTag({ title, valueProducts }: CreateTagSchema) {
+    await mutateAsync({ title, valueProducts});
   }
 
 
@@ -71,9 +71,9 @@ export function CreateTagForm() {
         )}
       </div>
       <div className="space-y-2">
-        <label className="text-sm font-medium block text-zinc-800" htmlFor="amountOfProducts">preco:</label>
+        <label className="text-sm font-medium block text-zinc-800" htmlFor="valueProducts">preco:</label>
         <input
-          {...register('amountOfProducts')}
+          {...register('valueProducts')}
           className="border border-indigo-400 rounded-lg px-3 px-y bg-zinc-400/50 w-full"
           placeholder="$"
           type="text"
